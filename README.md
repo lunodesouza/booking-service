@@ -1,4 +1,4 @@
-# Booking Service
+# 📅 Booking Service
 
 Booking-Service is a microservice for managing bookings and blocks. It provides RESTful endpoints to create, update, cancel, rebook, and delete bookings, as well as to create, update, and delete blocks, ensuring that no overlapping reservations occur.
 
