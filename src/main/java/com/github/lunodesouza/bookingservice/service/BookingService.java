@@ -37,10 +37,10 @@ public class BookingService {
         return bookingRepository.save(updated);
     }
 
-    public void cancelBooking(Long id) {
+    public Booking cancelBooking(Long id) {
         Booking booking = getBookingById(id);
         booking.setStatus(BookingStatus.CANCELLED);
-        bookingRepository.save(booking);
+        return bookingRepository.save(booking);
     }
 
     public Booking rebookBooking(Long id) {
@@ -55,8 +55,7 @@ public class BookingService {
     }
 
     public void deleteBooking(Long id) {
-        getBookingById(id);
-
-        bookingRepository.deleteById(id);
+        Booking existing = getBookingById(id);
+        bookingRepository.delete(existing);
     }
 }

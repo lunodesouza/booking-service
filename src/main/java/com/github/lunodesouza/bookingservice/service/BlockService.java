@@ -36,7 +36,8 @@ public class BlockService {
     }
 
     public void deleteBlock(Long id) {
-        blockRepository.deleteById(id);
+        Block existing = getBlockById(id);
+        blockRepository.delete(existing);
     }
 
 }

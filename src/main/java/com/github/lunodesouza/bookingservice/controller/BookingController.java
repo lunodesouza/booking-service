@@ -50,9 +50,9 @@ public class BookingController {
     }
 
     @PostMapping("/{id}/cancel")
-    public ResponseEntity<Void> cancelBooking(@PathVariable Long id) {
-        bookingService.cancelBooking(id);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<BookingResponse> cancelBooking(@PathVariable Long id) {
+        Booking canceledBooking = bookingService.cancelBooking(id);
+        return ResponseEntity.ok(bookingMapper.toResponse(canceledBooking));
     }
 
     @PostMapping("/{id}/rebook")
