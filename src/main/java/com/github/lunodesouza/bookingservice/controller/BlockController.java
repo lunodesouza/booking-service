@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/blocks")
+@RequestMapping("v1/blocks")
 @RequiredArgsConstructor
 public class BlockController {
     private final BlockService blockService;
