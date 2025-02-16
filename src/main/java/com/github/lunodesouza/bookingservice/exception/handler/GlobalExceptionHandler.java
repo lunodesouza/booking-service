@@ -1,6 +1,9 @@
 package com.github.lunodesouza.bookingservice.exception.handler;
 
+import com.github.lunodesouza.bookingservice.exception.BlockNotFoundException;
+import com.github.lunodesouza.bookingservice.exception.BookingNotFoundException;
 import com.github.lunodesouza.bookingservice.exception.dto.ErrorResponse;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -24,4 +27,12 @@ public class GlobalExceptionHandler {
                 .badRequest()
                 .body(new ErrorResponse("Validation failed", errors));
     }
+
+    @ExceptionHandler({BookingNotFoundException.class, BlockNotFoundException.class})
+    public ResponseEntity<ErrorResponse> handleNotFoundException(Exception ex) {
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(new ErrorResponse("Resource not found", ex.getMessage()));
+    }
+
 }

@@ -83,15 +83,24 @@ You can build and run the application using Docker.
 ---
 ## Booking Service
 
-| Method     | Endpoint                | Description                             | Request Body Example                                                                                                                    |
-|------------|-------------------------|-----------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------|
-| **GET**    | `/bookings`             | List all bookings                       | -                                                                                                                                       |
-| **POST**   | `/bookings`             | Create a new booking                    | ```json<br>{<br>  "propertyId": 1,<br>  "guestName": "Luno Souza",<br>  "startDate": "2025-05-10",<br>  "endDate": "2025-05-15"<br>}``` |
-| **GET**    | `/bookings/{id}`        | Get a booking by ID                     | -                                                                                                                                       |
-| **PUT**    | `/bookings/{id}`        | Update a booking by ID                  | ```json<br>{<br>  "propertyId": 1,<br>  "guestName": "Luno Souza",<br>  "startDate": "2025-05-10",<br>  "endDate": "2025-05-15"<br>}``` |
-| **POST**   | `/bookings/{id}/cancel` | Cancel a booking                        | -                                                                                                                                       |
-| **POST**   | `/bookings/{id}/rebook` | Rebook a canceled booking               | -                                                                                                                                       |
-| **DELETE** | `/bookings/{id}`        | Permanently delete a booking            | -                                                                                                                                       |
+| Method     | Endpoint                | Description               | Request Body Example                                                                                                      |
+|------------|-------------------------|---------------------------|---------------------------------------------------------------------------------------------------------------------------|
+| **GET**    | `v1/bookings`           | List all bookings         | -                                                                                                                         |
+| **GET**    | `v1/bookings/{id}`      | Get a booking by ID       | -                                                                                                                         |
+| **POST**   | `v1/bookings`             | Create a new booking      | {<br>"propertyId": 1,<br> "guestName": "Luno Souza",<br>  "startDate": "2025-05-10",<br>  "endDate": "2025-05-15"<br>}    |
+| **PUT**    | `v1/bookings/{id}`        | Update a booking by ID    | {<br>  "propertyId": 1,<br>  "guestName": "Luno Souza",<br>  "startDate": "2025-05-10",<br>  "endDate": "2025-05-25"<br>} |
+| **POST**   | `v1/bookings/{id}/cancel` | Cancel a booking          | -                                                                                                                         |
+| **POST**   | `v1/bookings/{id}/rebook` | Rebook a canceled booking | -                                                                                                                         |
+| **DELETE** | `v1/bookings/{id}`        | Delete a booking          | -                                                                                                                         |
+
+## Block Service
+| Method     | Endpoint                | Description                             | Request Body Example                                                                  |
+|------------|-------------------------|-----------------------------------------|---------------------------------------------------------------------------------------|
+| **GET**    | `v1/blocks`               | List all blocks                         | -                                                                                     |
+| **GET**    | `v1/blocks/{id}`          | Get a block by ID                       | -                                                                                     |
+| **POST**   | `v1/blocks`               | Create a new block                      | {<br>"propertyId": 1,<br> "startDate": "2025-05-10",<br> "endDate": "2025-05-15"<br>} |
+| **PUT**    | `v1/blocks/{id}`          | Update a block by ID                    | {<br>"propertyId": 1,<br> "startDate": "2025-05-10",<br> "endDate": "2025-05-25"<br>} |
+| **DELETE** | `v1/blocks/{id}`          | Delete a block                          | -                                                                                     |
 ---
 
 ### 📝 Notes:

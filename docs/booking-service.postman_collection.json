@@ -1,17 +1,10 @@
 {
 	"info": {
-		"_postman_id": "139989a3-9591-4768-b1e6-5aff6097f3bc",
+		"_postman_id": "e54be221-08a1-4d30-b84f-ce194f8cf83c",
 		"name": "booking-service",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "11595547"
 	},
-	"variable": [
-		{
-			"key": "base_url",
-			"value": "http://localhost:8080",
-			"type": "default"
-		}
-	],
 	"item": [
 		{
 			"name": "Booking",
@@ -31,11 +24,12 @@
 							"raw": "{\n  \"propertyId\": 1,\n  \"guestName\": \"Luno Souza\",\n  \"startDate\": \"2025-03-10\",\n  \"endDate\": \"2025-03-15\"\n}"
 						},
 						"url": {
-							"raw": "{{base_url}}/bookings",
+							"raw": "{{base_url}}/v1/bookings",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
+								"v1",
 								"bookings"
 							]
 						}
@@ -46,7 +40,17 @@
 					"name": "Get All Bookings",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/v1/bookings",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"bookings"
+							]
+						}
 					},
 					"response": []
 				},
@@ -56,11 +60,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/bookings/1",
+							"raw": "{{base_url}}/v1/bookings/1",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
+								"v1",
 								"bookings",
 								"1"
 							]
@@ -80,14 +85,15 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"propertyId\": 1,\n  \"guestName\": \"Luno Updated\",\n  \"startDate\": \"2025-03-10\",\n  \"endDate\": \"2025-03-15\"\n}"
+							"raw": "{\n  \"propertyId\": 1,\n  \"guestName\": \"Luno Updated\",\n  \"startDate\": \"2025-03-10\",\n  \"endDate\": \"2025-03-20\"\n}"
 						},
 						"url": {
-							"raw": "{{base_url}}/bookings/1",
+							"raw": "{{base_url}}/v1/bookings/1",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
+								"v1",
 								"bookings",
 								"1"
 							]
@@ -101,11 +107,12 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/bookings/1/cancel",
+							"raw": "{{base_url}}/v1/bookings/1/cancel",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
+								"v1",
 								"bookings",
 								"1",
 								"cancel"
@@ -120,11 +127,12 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/bookings/1/rebook",
+							"raw": "{{base_url}}/v1/bookings/1/rebook",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
+								"v1",
 								"bookings",
 								"1",
 								"rebook"
@@ -139,11 +147,12 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/bookings/1",
+							"raw": "{{base_url}}/v1/bookings/1",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
+								"v1",
 								"bookings",
 								"1"
 							]
@@ -152,6 +161,153 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Block",
+			"item": [
+				{
+					"name": "Create Block",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"propertyId\": 1,\r\n  \"startDate\": \"2025-03-10\",\r\n  \"endDate\": \"2025-03-15\",\r\n  \"reason\": \"Blocked to personal use.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/v1/blocks",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"blocks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Blocks",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"propertyId\": 1,\r\n  \"startDate\": \"2025-03-10\",\r\n  \"endDate\": \"2025-03-15\",\r\n  \"reason\": \"Blocked to personal use.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/v1/blocks",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"blocks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Blocks by ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"propertyId\": 1,\r\n  \"startDate\": \"2025-03-10\",\r\n  \"endDate\": \"2025-03-15\",\r\n  \"reason\": \"Blocked to personal use.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/v1/blocks/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"blocks",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Block",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"propertyId\": 1,\r\n  \"startDate\": \"2025-03-10\",\r\n  \"endDate\": \"2025-03-15\",\r\n  \"reason\": \"Blocked for vacation.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/v1/blocks/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"blocks",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Block",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/v1/blocks/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"blocks",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8080",
+			"type": "default"
 		}
 	]
 }

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/bookings")
+@RequestMapping("v1/bookings")
 @RequiredArgsConstructor
 public class BookingController {
     private final BookingService bookingService;
@@ -50,9 +50,9 @@ public class BookingController {
     }
 
     @PostMapping("/{id}/cancel")
-    public ResponseEntity<Void> cancelBooking(@PathVariable Long id) {
-        bookingService.cancelBooking(id);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<BookingResponse> cancelBooking(@PathVariable Long id) {
+        Booking canceledBooking = bookingService.cancelBooking(id);
+        return ResponseEntity.ok(bookingMapper.toResponse(canceledBooking));
     }
 
     @PostMapping("/{id}/rebook")
