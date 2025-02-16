@@ -77,5 +77,26 @@ You can build and run the application using Docker.
    ```
 
 ## API Usage
+### Postman Collection
+[`docs/booking-service.postman_collection.json`](/docs/booking-service.postman_collection.json)
+
+---
+## Booking Service
+
+| Method     | Endpoint                | Description                             | Request Body Example                                                                                                                    |
+|------------|-------------------------|-----------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------|
+| **GET**    | `/bookings`             | List all bookings                       | -                                                                                                                                       |
+| **POST**   | `/bookings`             | Create a new booking                    | ```json<br>{<br>  "propertyId": 1,<br>  "guestName": "Luno Souza",<br>  "startDate": "2025-05-10",<br>  "endDate": "2025-05-15"<br>}``` |
+| **GET**    | `/bookings/{id}`        | Get a booking by ID                     | -                                                                                                                                       |
+| **PUT**    | `/bookings/{id}`        | Update a booking by ID                  | ```json<br>{<br>  "propertyId": 1,<br>  "guestName": "Luno Souza",<br>  "startDate": "2025-05-10",<br>  "endDate": "2025-05-15"<br>}``` |
+| **POST**   | `/bookings/{id}/cancel` | Cancel a booking                        | -                                                                                                                                       |
+| **POST**   | `/bookings/{id}/rebook` | Rebook a canceled booking               | -                                                                                                                                       |
+| **DELETE** | `/bookings/{id}`        | Permanently delete a booking            | -                                                                                                                                       |
+---
+
+### 📝 Notes:
+- Replace `{id}` with the actual resource ID (e.g., `/bookings/1`).
+- Dates must be in **ISO format** (`YYYY-MM-DD`).
+
 
 (under construction)
