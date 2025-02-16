@@ -55,6 +55,8 @@ public class BookingService {
     }
 
     public void deleteBooking(Long id) {
+        getBookingById(id);
+
         bookingRepository.deleteById(id);
     }
 }
