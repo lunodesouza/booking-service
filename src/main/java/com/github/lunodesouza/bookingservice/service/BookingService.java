@@ -81,7 +81,7 @@ public class BookingService {
         validateOverlapUseCase.validate(booking.getPropertyId(),
                 booking.getStartDate(),
                 booking.getEndDate(),
-                null);
+                id);
 
         if (booking.getStatus() != BookingStatus.CANCELLED) {
             log.error("Status {} - Only cancelled bookings can be rebooked Booking [{}]", booking.getStatus(), booking);
