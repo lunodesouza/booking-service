@@ -1,6 +1,6 @@
 package com.github.lunodesouza.bookingservice.service;
 
-import com.github.lunodesouza.bookingservice.dto.BlockRequest;
+import com.github.lunodesouza.bookingservice.dto.request.BlockRequest;
 import com.github.lunodesouza.bookingservice.exception.BlockNotFoundException;
 import com.github.lunodesouza.bookingservice.mapper.BlockMapper;
 import com.github.lunodesouza.bookingservice.model.Block;
@@ -15,9 +15,16 @@ import java.util.List;
 public class BlockService {
     private final BlockRepository blockRepository;
     private final BlockMapper blockMapper;
+    private final OverlapService overlapService;
 
-    public Block createBlock(BlockRequest blockRequest){
-        return blockRepository.save(blockMapper.toEntity(blockRequest));
+    public Block createBlock(BlockRequest request){
+
+        overlapService.validateConflicts(request.getPropertyId(),
+                request.getStartDate(),
+                request.getEndDate(),
+                null);
+
+        return blockRepository.save(blockMapper.toEntity(request));
     }
 
     public List<Block> getAllBlocks(){
@@ -30,8 +37,14 @@ public class BlockService {
     }
 
     public Block updateBlock(Long id, BlockRequest request) {
+        overlapService.validateConflicts(request.getPropertyId(),
+                request.getStartDate(),
+                request.getEndDate(),
+                id);
+
         Block existing = getBlockById(id);
         Block updated = blockMapper.updateEntity(existing, request);
+
         return blockRepository.save(updated);
     }
 

@@ -1,7 +1,7 @@
 package com.github.lunodesouza.bookingservice.controller;
 
-import com.github.lunodesouza.bookingservice.dto.BlockRequest;
-import com.github.lunodesouza.bookingservice.dto.BlockResponse;
+import com.github.lunodesouza.bookingservice.dto.request.BlockRequest;
+import com.github.lunodesouza.bookingservice.dto.response.BlockResponse;
 import com.github.lunodesouza.bookingservice.mapper.BlockMapper;
 import com.github.lunodesouza.bookingservice.model.Block;
 import com.github.lunodesouza.bookingservice.service.BlockService;

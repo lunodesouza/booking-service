@@ -1,7 +1,7 @@
 package com.github.lunodesouza.bookingservice.mapper;
 
-import com.github.lunodesouza.bookingservice.dto.BlockRequest;
-import com.github.lunodesouza.bookingservice.dto.BlockResponse;
+import com.github.lunodesouza.bookingservice.dto.request.BlockRequest;
+import com.github.lunodesouza.bookingservice.dto.response.BlockResponse;
 import com.github.lunodesouza.bookingservice.model.Block;
 import org.springframework.stereotype.Component;
 

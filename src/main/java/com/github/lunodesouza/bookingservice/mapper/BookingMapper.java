@@ -1,7 +1,7 @@
 package com.github.lunodesouza.bookingservice.mapper;
 
-import com.github.lunodesouza.bookingservice.dto.BookingRequest;
-import com.github.lunodesouza.bookingservice.dto.BookingResponse;
+import com.github.lunodesouza.bookingservice.dto.request.BookingRequest;
+import com.github.lunodesouza.bookingservice.dto.response.BookingResponse;
 import com.github.lunodesouza.bookingservice.model.Booking;
 import com.github.lunodesouza.bookingservice.model.BookingStatus;
 import org.springframework.stereotype.Component;

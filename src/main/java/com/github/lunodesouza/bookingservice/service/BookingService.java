@@ -1,6 +1,6 @@
 package com.github.lunodesouza.bookingservice.service;
 
-import com.github.lunodesouza.bookingservice.dto.BookingRequest;
+import com.github.lunodesouza.bookingservice.dto.request.BookingRequest;
 import com.github.lunodesouza.bookingservice.exception.BookingNotFoundException;
 import com.github.lunodesouza.bookingservice.exception.InvalidOperationException;
 import com.github.lunodesouza.bookingservice.mapper.BookingMapper;
@@ -17,8 +17,15 @@ import java.util.List;
 public class BookingService {
     private final BookingRepository bookingRepository;
     private final BookingMapper bookingMapper;
+    private final OverlapService overlapService;
 
     public Booking createBooking(BookingRequest request) {
+
+        overlapService.validateConflicts(request.getPropertyId(),
+                request.getStartDate(),
+                request.getEndDate(),
+                null);
+
         return bookingRepository.save(bookingMapper.toEntity(request));
     }
 
@@ -32,6 +39,11 @@ public class BookingService {
     }
 
     public Booking updateBooking(Long id, BookingRequest request) {
+        overlapService.validateConflicts(request.getPropertyId(),
+                request.getStartDate(),
+                request.getEndDate(),
+                id);
+
         Booking existing = getBookingById(id);
         Booking updated = bookingMapper.updateEntity(existing, request);
         return bookingRepository.save(updated);
@@ -46,6 +58,11 @@ public class BookingService {
     public Booking rebookBooking(Long id) {
         Booking booking = getBookingById(id);
 
+        overlapService.validateConflicts(booking.getPropertyId(),
+                booking.getStartDate(),
+                booking.getEndDate(),
+                null);
+
         if (booking.getStatus() != BookingStatus.CANCELLED) {
             throw new InvalidOperationException("Only cancelled bookings can be rebooked");
         }
@@ -58,4 +75,6 @@ public class BookingService {
         Booking existing = getBookingById(id);
         bookingRepository.delete(existing);
     }
+
+
 }
