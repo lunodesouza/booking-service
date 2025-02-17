@@ -2,6 +2,7 @@ package com.github.lunodesouza.bookingservice.exception.handler;
 
 import com.github.lunodesouza.bookingservice.exception.BlockNotFoundException;
 import com.github.lunodesouza.bookingservice.exception.BookingNotFoundException;
+import com.github.lunodesouza.bookingservice.exception.DateConflictException;
 import com.github.lunodesouza.bookingservice.exception.dto.ErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,6 +34,12 @@ public class GlobalExceptionHandler {
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
                 .body(new ErrorResponse("Resource not found", ex.getMessage()));
+    }
+
+    @ExceptionHandler(DateConflictException.class)
+    public ResponseEntity<ErrorResponse> handleDateConflict(DateConflictException ex) {
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(new ErrorResponse("Date Conflict", ex.getMessage()));
     }
 
 }

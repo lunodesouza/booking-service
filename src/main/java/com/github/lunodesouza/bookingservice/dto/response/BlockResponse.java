@@ -1,4 +1,4 @@
-package com.github.lunodesouza.bookingservice.dto;
+package com.github.lunodesouza.bookingservice.dto.response;
 
 import lombok.Builder;
 import lombok.Data;

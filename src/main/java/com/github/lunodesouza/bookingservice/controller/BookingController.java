@@ -1,7 +1,7 @@
 package com.github.lunodesouza.bookingservice.controller;
 
-import com.github.lunodesouza.bookingservice.dto.BookingRequest;
-import com.github.lunodesouza.bookingservice.dto.BookingResponse;
+import com.github.lunodesouza.bookingservice.dto.request.BookingRequest;
+import com.github.lunodesouza.bookingservice.dto.response.BookingResponse;
 import com.github.lunodesouza.bookingservice.mapper.BookingMapper;
 import com.github.lunodesouza.bookingservice.model.Booking;
 import com.github.lunodesouza.bookingservice.service.BookingService;

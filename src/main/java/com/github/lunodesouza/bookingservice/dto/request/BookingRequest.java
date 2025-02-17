@@ -1,9 +1,6 @@
-package com.github.lunodesouza.bookingservice.dto;
+package com.github.lunodesouza.bookingservice.dto.request;
 
-import jakarta.validation.constraints.FutureOrPresent;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -30,4 +27,10 @@ public class BookingRequest {
     @NotNull(message = "endDate is required")
     @FutureOrPresent(message = "endDate must be a present or future date")
     private LocalDate endDate;
+
+    @AssertTrue(message = "startDate must be before endDate")
+    private boolean isValidDateRange() {
+        if (startDate == null || endDate == null) return true;
+        return !startDate.isAfter(endDate);
+    }
 }

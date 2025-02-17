@@ -1,5 +1,6 @@
-package com.github.lunodesouza.bookingservice.dto;
+package com.github.lunodesouza.bookingservice.dto.request;
 
+import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -28,4 +29,10 @@ public class BlockRequest {
 
     @Size(max = 255, message = "reason must be up to 255 characters")
     private String reason;
+
+    @AssertTrue(message = "startDate must be before endDate")
+    private boolean isValidDateRange() {
+        if (startDate == null || endDate == null) return true;
+        return !startDate.isAfter(endDate);
+    }
 }
