@@ -58,7 +58,7 @@ You can build and run the application using Docker.
 2. **Run the Docker Container:**
 
    ```bash
-   docker run -d -p 8080:8080 --name booking-service booking-service:latest
+   docker run -p 8080:8080 --name booking-service booking-service:latest
    ```
 
    The service will be available at [http://localhost:8080/booking-service](http://localhost:8080).
