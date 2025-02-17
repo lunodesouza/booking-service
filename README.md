@@ -61,7 +61,7 @@ You can build and run the application using Docker.
    docker run -d -p 8080:8080 --name booking-service booking-service:latest
    ```
 
-   The service will be available at [http://localhost:8080](http://localhost:8080).
+   The service will be available at [http://localhost:8080/booking-service](http://localhost:8080).
 
 
 3. **Stop the Container:**
@@ -77,16 +77,19 @@ You can build and run the application using Docker.
    ```
 
 ## API Usage
+### Swagger UI
+http://localhost:8080/booking-service/swagger-ui.html
+
 ### Postman Collection
 [`docs/booking-service.postman_collection.json`](/docs/booking-service.postman_collection.json)
 
 ---
 ## Booking Service
 
-| Method     | Endpoint                | Description               | Request Body Example                                                                                                      |
-|------------|-------------------------|---------------------------|---------------------------------------------------------------------------------------------------------------------------|
-| **GET**    | `v1/bookings`           | List all bookings         | -                                                                                                                         |
-| **GET**    | `v1/bookings/{id}`      | Get a booking by ID       | -                                                                                                                         |
+| Method     | Endpoint                  | Description               | Request Body Example                                                                                                      |
+|------------|---------------------------|---------------------------|---------------------------------------------------------------------------------------------------------------------------|
+| **GET**    | `v1/bookings`             | List all bookings         | -                                                                                                                         |
+| **GET**    | `v1/bookings/{id}`        | Get a booking by ID       | -                                                                                                                         |
 | **POST**   | `v1/bookings`             | Create a new booking      | {<br>"propertyId": 1,<br> "guestName": "Luno Souza",<br>  "startDate": "2025-05-10",<br>  "endDate": "2025-05-15"<br>}    |
 | **PUT**    | `v1/bookings/{id}`        | Update a booking by ID    | {<br>  "propertyId": 1,<br>  "guestName": "Luno Souza",<br>  "startDate": "2025-05-10",<br>  "endDate": "2025-05-25"<br>} |
 | **POST**   | `v1/bookings/{id}/cancel` | Cancel a booking          | -                                                                                                                         |
@@ -94,13 +97,13 @@ You can build and run the application using Docker.
 | **DELETE** | `v1/bookings/{id}`        | Delete a booking          | -                                                                                                                         |
 
 ## Block Service
-| Method     | Endpoint                | Description                             | Request Body Example                                                                  |
-|------------|-------------------------|-----------------------------------------|---------------------------------------------------------------------------------------|
-| **GET**    | `v1/blocks`               | List all blocks                         | -                                                                                     |
-| **GET**    | `v1/blocks/{id}`          | Get a block by ID                       | -                                                                                     |
-| **POST**   | `v1/blocks`               | Create a new block                      | {<br>"propertyId": 1,<br> "startDate": "2025-05-10",<br> "endDate": "2025-05-15"<br>} |
-| **PUT**    | `v1/blocks/{id}`          | Update a block by ID                    | {<br>"propertyId": 1,<br> "startDate": "2025-05-10",<br> "endDate": "2025-05-25"<br>} |
-| **DELETE** | `v1/blocks/{id}`          | Delete a block                          | -                                                                                     |
+| Method     | Endpoint                 | Description            | Request Body Example                                                                  |
+|------------|--------------------------|------------------------|---------------------------------------------------------------------------------------|
+| **GET**    | `v1/blocks`              | List all blocks        | -                                                                                     |
+| **GET**    | `v1/blocks/{id}`         | Get a block by ID      | -                                                                                     |
+| **POST**   | `v1/blocks`              | Create a new block     | {<br>"propertyId": 1,<br> "startDate": "2025-05-10",<br> "endDate": "2025-05-15"<br>} |
+| **PUT**    | `v1/blocks/{id}`         | Update a block by ID   | {<br>"propertyId": 1,<br> "startDate": "2025-05-10",<br> "endDate": "2025-05-25"<br>} |
+| **DELETE** | `v1/blocks/{id}`         | Delete a block         | -                                                                                     |
 
 ### 📝 Notes:
 - Replace `{id}` with the actual resource ID (e.g., `/bookings/1`).
