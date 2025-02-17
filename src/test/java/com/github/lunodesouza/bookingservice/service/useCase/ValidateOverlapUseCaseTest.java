@@ -1,4 +1,4 @@
-package com.github.lunodesouza.bookingservice.service;
+package com.github.lunodesouza.bookingservice.service.useCase;
 
 import com.github.lunodesouza.bookingservice.builder.OverlapTestParamsBuilder;
 import com.github.lunodesouza.bookingservice.exception.DateConflictException;
@@ -17,7 +17,7 @@ import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class OverlapServiceTest {
+public class ValidateOverlapUseCaseTest {
 
     @Mock
     private BookingRepository bookingRepository;
@@ -26,7 +26,7 @@ public class OverlapServiceTest {
     private BlockRepository blockRepository;
 
     @InjectMocks
-    private OverlapService overlapService;
+    private ValidateOverlapUseCase overlapService;
 
     @Test
     public void testValidateConflicts_noConflicts() {
@@ -38,7 +38,7 @@ public class OverlapServiceTest {
                 .thenReturn(false);
 
         assertDoesNotThrow(() ->
-                overlapService.validateConflicts(params.getPropertyId(), params.getStartDate(), params.getEndDate(), params.getExcludeId())
+                overlapService.validate(params.getPropertyId(), params.getStartDate(), params.getEndDate(), params.getExcludeId())
         );
 
         verify(bookingRepository).existsConflictingBooking(params.getPropertyId(), params.getStartDate(), params.getEndDate(), params.getExcludeId());
@@ -53,7 +53,7 @@ public class OverlapServiceTest {
                 .thenReturn(true);
 
         DateConflictException exception = assertThrows(DateConflictException.class, () ->
-                overlapService.validateConflicts(params.getPropertyId(), params.getStartDate(), params.getEndDate(), params.getExcludeId())
+                overlapService.validate(params.getPropertyId(), params.getStartDate(), params.getEndDate(), params.getExcludeId())
         );
 
         assertEquals("Conflict with existing booking", exception.getMessage());
@@ -72,7 +72,7 @@ public class OverlapServiceTest {
                 .thenReturn(true);
 
         DateConflictException exception = assertThrows(DateConflictException.class, () ->
-                overlapService.validateConflicts(params.getPropertyId(), params.getStartDate(), params.getEndDate(), params.getExcludeId())
+                overlapService.validate(params.getPropertyId(), params.getStartDate(), params.getEndDate(), params.getExcludeId())
         );
 
         assertEquals("Conflict with existing block", exception.getMessage());

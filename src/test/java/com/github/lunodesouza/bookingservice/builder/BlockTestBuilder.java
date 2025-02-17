@@ -7,8 +7,8 @@ import java.time.LocalDate;
 public class BlockTestBuilder {
     private Long id = 1L;
     private Long propertyId = 1L;
-    private LocalDate startDate = LocalDate.of(2025, 5, 10);
-    private LocalDate endDate = LocalDate.of(2025, 5, 15);
+    private LocalDate startDate = LocalDate.now().plusYears(1).plusDays(1);
+    private LocalDate endDate = startDate.plusYears(1).plusDays(10);
     private String reason = "Maintenance";
 
     public BlockTestBuilder withId(Long id) {

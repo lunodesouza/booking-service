@@ -9,6 +9,7 @@ import com.github.lunodesouza.bookingservice.mapper.BookingMapper;
 import com.github.lunodesouza.bookingservice.model.Booking;
 import com.github.lunodesouza.bookingservice.model.BookingStatus;
 import com.github.lunodesouza.bookingservice.repository.BookingRepository;
+import com.github.lunodesouza.bookingservice.service.useCase.ValidateOverlapUseCase;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -30,7 +31,7 @@ public class BookingServiceTest {
     private BookingMapper bookingMapper;
 
     @Mock
-    private OverlapService overlapService;
+    private ValidateOverlapUseCase overlapService;
 
     @InjectMocks
     private BookingService bookingService;
@@ -48,7 +49,7 @@ public class BookingServiceTest {
         assertNotNull(result);
         assertEquals(1L, result.getId());
         verify(overlapService, times(1))
-                .validateConflicts(request.getPropertyId(), request.getStartDate(), request.getEndDate(), null);
+                .validate(request.getPropertyId(), request.getStartDate(), request.getEndDate(), null);
     }
 
     @Test
@@ -57,7 +58,7 @@ public class BookingServiceTest {
 
         doThrow(new DateConflictException("Conflict with existing booking"))
                 .when(overlapService)
-                .validateConflicts(request.getPropertyId(), request.getStartDate(), request.getEndDate(), null);
+                .validate(request.getPropertyId(), request.getStartDate(), request.getEndDate(), null);
 
         DateConflictException exception = assertThrows(DateConflictException.class, () -> {
             bookingService.createBooking(request);
@@ -89,7 +90,7 @@ public class BookingServiceTest {
 
         when(bookingRepository.findById(1L)).thenReturn(Optional.of(booking));
         doNothing().when(overlapService)
-                .validateConflicts(booking.getPropertyId(), booking.getStartDate(), booking.getEndDate(), null);
+                .validate(booking.getPropertyId(), booking.getStartDate(), booking.getEndDate(), null);
 
         Booking updatedBooking = new BookingTestBuilder()
                 .withStatus(BookingStatus.ACTIVE)
@@ -102,7 +103,7 @@ public class BookingServiceTest {
         assertNotNull(result);
         assertEquals(BookingStatus.ACTIVE, result.getStatus());
         verify(overlapService, times(1))
-                .validateConflicts(booking.getPropertyId(), booking.getStartDate(), booking.getEndDate(), null);
+                .validate(booking.getPropertyId(), booking.getStartDate(), booking.getEndDate(), null);
     }
 
     @Test
@@ -130,7 +131,7 @@ public class BookingServiceTest {
 
         doThrow(new DateConflictException("Conflict with existing block"))
                 .when(overlapService)
-                .validateConflicts(booking.getPropertyId(), booking.getStartDate(), booking.getEndDate(), null);
+                .validate(booking.getPropertyId(), booking.getStartDate(), booking.getEndDate(), null);
 
         DateConflictException exception = assertThrows(DateConflictException.class, () -> {
             bookingService.rebookBooking(1L);
