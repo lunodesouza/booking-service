@@ -3,6 +3,7 @@ package com.github.lunodesouza.bookingservice.exception.handler;
 import com.github.lunodesouza.bookingservice.exception.BlockNotFoundException;
 import com.github.lunodesouza.bookingservice.exception.BookingNotFoundException;
 import com.github.lunodesouza.bookingservice.exception.DateConflictException;
+import com.github.lunodesouza.bookingservice.exception.InvalidOperationException;
 import com.github.lunodesouza.bookingservice.exception.dto.ErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,6 +41,13 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponse> handleDateConflict(DateConflictException ex) {
         return ResponseEntity.status(HttpStatus.CONFLICT)
                 .body(new ErrorResponse("Date Conflict", ex.getMessage()));
+    }
+
+    @ExceptionHandler(InvalidOperationException.class)
+    public ResponseEntity<ErrorResponse> handleInvalidOperationException(InvalidOperationException ex) {
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(new ErrorResponse("Invalid Operation", ex.getMessage()));
     }
 
 }
