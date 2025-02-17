@@ -8,18 +8,21 @@ import com.github.lunodesouza.bookingservice.model.Booking;
 import com.github.lunodesouza.bookingservice.model.BookingStatus;
 import com.github.lunodesouza.bookingservice.repository.BookingRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class BookingService {
     private final BookingRepository bookingRepository;
     private final BookingMapper bookingMapper;
     private final OverlapService overlapService;
 
     public Booking createBooking(BookingRequest request) {
+        log.info("createBlock request[{}]", request.toString());
 
         overlapService.validateConflicts(request.getPropertyId(),
                 request.getStartDate(),
@@ -34,11 +37,17 @@ public class BookingService {
     }
 
     public Booking getBookingById(Long id) {
+        log.info("getBookingById [{}]", id);
         return bookingRepository.findById(id)
-                .orElseThrow(() -> new BookingNotFoundException("Booking not found with id: " + id));
+                .orElseThrow(() -> {
+                    log.error("Booking not found with id [{}]", id);
+                    return new BookingNotFoundException("Booking not found with id: " + id);
+                });
     }
 
     public Booking updateBooking(Long id, BookingRequest request) {
+        log.info("updateBooking with id [{}] request [{}]", id, request);
+
         overlapService.validateConflicts(request.getPropertyId(),
                 request.getStartDate(),
                 request.getEndDate(),
@@ -50,12 +59,15 @@ public class BookingService {
     }
 
     public Booking cancelBooking(Long id) {
+        log.info("cancelBooking with id [{}]", id);
+
         Booking booking = getBookingById(id);
         booking.setStatus(BookingStatus.CANCELLED);
         return bookingRepository.save(booking);
     }
 
     public Booking rebookBooking(Long id) {
+        log.info("rebookBooking with id [{}]", id);
         Booking booking = getBookingById(id);
 
         overlapService.validateConflicts(booking.getPropertyId(),
@@ -64,6 +76,7 @@ public class BookingService {
                 null);
 
         if (booking.getStatus() != BookingStatus.CANCELLED) {
+            log.error("Status {} - Only cancelled bookings can be rebooked Booking [{}]", booking.getStatus(), booking);
             throw new InvalidOperationException("Only cancelled bookings can be rebooked");
         }
 
@@ -72,6 +85,7 @@ public class BookingService {
     }
 
     public void deleteBooking(Long id) {
+        log.info("deleteBooking id [{}]", id);
         Booking existing = getBookingById(id);
         bookingRepository.delete(existing);
     }
