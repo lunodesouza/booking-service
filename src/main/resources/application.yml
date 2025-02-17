@@ -1,3 +1,7 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /booking-service
 spring:
   application:
     name: booking-service

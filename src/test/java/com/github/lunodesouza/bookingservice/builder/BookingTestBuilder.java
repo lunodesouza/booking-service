@@ -9,8 +9,8 @@ public class BookingTestBuilder {
     private Long id = 1L;
     private Long propertyId = 1L;
     private String guestName = "Luno Souza";
-    private LocalDate startDate = LocalDate.of(2025, 5, 10);
-    private LocalDate endDate = LocalDate.of(2025, 5, 15);
+    private LocalDate startDate = LocalDate.now().plusYears(1).plusDays(1);
+    private LocalDate endDate = startDate.plusYears(1).plusDays(10);
     private BookingStatus status = BookingStatus.ACTIVE;
 
     public BookingTestBuilder withId(Long id) {

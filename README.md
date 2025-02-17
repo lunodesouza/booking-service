@@ -101,11 +101,45 @@ You can build and run the application using Docker.
 | **POST**   | `v1/blocks`               | Create a new block                      | {<br>"propertyId": 1,<br> "startDate": "2025-05-10",<br> "endDate": "2025-05-15"<br>} |
 | **PUT**    | `v1/blocks/{id}`          | Update a block by ID                    | {<br>"propertyId": 1,<br> "startDate": "2025-05-10",<br> "endDate": "2025-05-25"<br>} |
 | **DELETE** | `v1/blocks/{id}`          | Delete a block                          | -                                                                                     |
----
 
 ### 📝 Notes:
 - Replace `{id}` with the actual resource ID (e.g., `/bookings/1`).
 - Dates must be in **ISO format** (`YYYY-MM-DD`).
 
+---
+### 🚀 What's Next?
 
+Future improvements for the booking-service:
+### 1. Centralized Database for Horizontal Scaling
+
+Replace the in-memory H2 database with a cloud-native database (e.g., PostgreSQL/MySQL) to:
+- Enable microservices architecture scalability 
+- Support distributed transactions 
+- Implement connection pooling for performance 
+- Facilitate database replication and backups
+
+### 2. Property Management API
+
+Implement a CRUD for Properties to:
+- Allow creation/management of properties (name, location, amenities)
+
+### 3. Authentication & Role-Based Access
+
+Add OAuth2/JWT-based authentication with granular permissions:
+- Role	
+- Permissions 
+- Guest	Create/view own bookings 
+- Property Owner	
+- Manage blocks for owned properties 
+- Manager Full Permissions for bookings/blocks/properties
+
+### 4. L2 Caching
+
+Implement second-level caching to:
+- Reduce database load for frequent read operations 
+- Cache entities like active bookings and blocks 
+- Configure time-to-live (TTL) policies:
+- Monitor cache hit/miss ratios for optimization
+
+These enhancements will transform the service into a production-ready, scalable solution while maintaining performance and security.
 

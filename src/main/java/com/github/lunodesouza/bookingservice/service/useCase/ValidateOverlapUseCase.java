@@ -1,4 +1,4 @@
-package com.github.lunodesouza.bookingservice.service;
+package com.github.lunodesouza.bookingservice.service.useCase;
 
 import com.github.lunodesouza.bookingservice.exception.DateConflictException;
 import com.github.lunodesouza.bookingservice.repository.BlockRepository;
@@ -12,17 +12,15 @@ import java.time.LocalDate;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class OverlapService {
+public class ValidateOverlapUseCase {
     private final BookingRepository bookingRepository;
     private final BlockRepository blockRepository;
 
-    public void validateConflicts(Long propertyId, LocalDate startDate, LocalDate endDate, Long excludeId) {
-        if (bookingRepository.existsConflictingBooking(
-                propertyId,
-                startDate,
-                endDate,
-                excludeId)) {
+    public void validate(Long propertyId, LocalDate startDate, LocalDate endDate, Long excludeId) {
+        boolean hasBookingConflict = bookingRepository.existsConflictingBooking(propertyId, startDate, endDate, excludeId);
+        boolean hasBlockConflict = blockRepository.existsConflictingBlock(propertyId, startDate, endDate, excludeId);
 
+        if (hasBookingConflict) {
             log.error("Conflict with existing booking propertyId: [{}] startDate: [{}]: endDate: [{}] excludeId: [{}]",
                     propertyId,
                     startDate,
@@ -32,13 +30,8 @@ public class OverlapService {
             throw new DateConflictException("Conflict with existing booking");
         }
 
-        if (blockRepository.existsConflictingBlock(
-                propertyId,
-                startDate,
-                endDate,
-                excludeId)){
-
-            log.error("Conflict with existing booking propertyId: [{}] startDate: [{}]: endDate: [{}] excludeId: [{}]",
+        if (hasBlockConflict){
+            log.error("Conflict with existing block propertyId: [{}] startDate: [{}]: endDate: [{}] excludeId: [{}]",
                         propertyId,
                         startDate,
                         endDate,
@@ -46,6 +39,5 @@ public class OverlapService {
 
             throw new DateConflictException("Conflict with existing block");
         }
-
     }
 }

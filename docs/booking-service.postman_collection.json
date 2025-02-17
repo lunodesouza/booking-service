@@ -303,10 +303,32 @@
 			]
 		}
 	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
 	"variable": [
 		{
 			"key": "base_url",
-			"value": "http://localhost:8080",
+			"value": "http://localhost:8080/booking-service",
 			"type": "default"
 		}
 	]
